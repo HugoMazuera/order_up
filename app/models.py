@@ -75,9 +75,9 @@ class Order(db.Model, UserMixin):
     __tablename__ = 'orders'
 
     id = db.Column(db.Integer, primary_key=True)
-    employee_id = db.Column(db.Integer, db.ForeignKey("employees.id"),not_nullable=True )
-    table_id = db.Column(db.Integer, db.ForeignKey("tables.id"),not_nullable=True)
-    finished = db.Column(db.Boolean, not_nullable=True)
+    employee_id = db.Column(db.Integer, db.ForeignKey("employees.id"),nullable=True )
+    table_id = db.Column(db.Integer, db.ForeignKey("tables.id"),nullable=True)
+    finished = db.Column(db.Boolean, nullable=True)
 
     table_order = db.relationship("Table", back_populates="orders")
     order_deets = db.relationship("OrderDetail", back_populates="one_order")
@@ -88,7 +88,7 @@ class OrderDetail(db.Model, UserMixin):
     __tablename__ = "order_details"
 
     id = db.Column(db.Integer, primary_key=True)
-    order_id = db.Column(db.Integer, db.ForeignKey("orders.id"),not_nullable=True)
-    menu_item_id = db.Column(db.Integer, db.ForeignKey("menu_items.id"),not_nullable=True)
+    order_id = db.Column(db.Integer, db.ForeignKey("orders.id"),nullable=True)
+    menu_item_id = db.Column(db.Integer, db.ForeignKey("menu_items.id"),nullable=True)
 
-    one_order = db.relationship("Orders", back_populates="order_deets")
+    one_order = db.relationship("Order", back_populates="order_deets")
