@@ -9,4 +9,9 @@
   <body>
     {% block content %}{% endblock %}
   </body>
+  {% if current_user.is_authenticated %}
+  <form method="post" action="{{ url_for('session.logout') }}">
+    <button type="submit">Log-Out</button>
+  </form>
+  {%endif%}
 </html>
